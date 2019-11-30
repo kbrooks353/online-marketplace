@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Fragment, Component } from 'react';
 import './App.css';
+import AppBar from "./components/AppBar"
+import SearchBox from "./components/SearchBox"
+import DataBody from "./components/DataBody"
+import products from "./products/products.json"
 
-function App() {
+class App extends Component {
+
+  state = {
+    products
+  }
+   
+render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <AppBar/>
+      <SearchBox/>
+      {this.state.products.map(product => (
+        <DataBody 
+          name={product.name}
+          image= {product.image}
+          price= {product.salePrice}
+        />
+      ))}
+      
+    </Fragment>
   );
+}
+ 
 }
 
 export default App;
